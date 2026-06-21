@@ -50,12 +50,18 @@
             </button>
         </div>
 
-        <div id="studentYearSection" class="hidden bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-sky-100 text-center mb-8">
-            <p class="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">ကျောင်းသားများအတွက် အတန်းရွေးချယ်ပါ</p>
-            <div class="flex flex-wrap justify-center gap-3">
-                <button onclick="showStudentsByYear('Year-1')" class="cursor-pointer px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium shadow-sm transition-colors">Year 1</button>
-                <button onclick="showStudentsByYear('Year-2')" class="cursor-pointer px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium shadow-sm transition-colors">Year 2</button>
-                <button onclick="showStudentsByYear('Year-3')" class="cursor-pointer px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium shadow-sm transition-colors">Year 3</button>
+        <div id="studentYearSection" class="hidden bg-white/60 backdrop-blur-sm p-5 rounded-2xl border border-sky-100 text-center mb-8">
+            <p class="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">ကျောင်းသားများအတွက် အတန်းရွေးချယ်ပါ</p>
+            <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-2">
+                <button onclick="showStudentsByYear('Year-1')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 1</button>
+                <button onclick="showStudentsByYear('Year-2')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 2</button>
+                <button onclick="showStudentsByYear('Year-3')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 3</button>
+                <button onclick="showStudentsByYear('Year-4')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 4</button>
+                <button onclick="showStudentsByYear('Year-5')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 5</button>
+                <button onclick="showStudentsByYear('Year-6')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 6</button>
+                <button onclick="showStudentsByYear('Year-7')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 7</button>
+                <button onclick="showStudentsByYear('Year-8')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 8</button>
+                <button onclick="showStudentsByYear('Year-9')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 9</button>
             </div>
         </div>
 
@@ -78,12 +84,10 @@
     </footer>
 
     <script>
-        // လင့်ခ်အသစ်စက်စက်ကို အောက်တွင် တိုက်ရိုက်ထည့်သွင်းပေးထားပါသည်
         const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxHkclv0R8xra6_-B9ZohDKOogazdDxRq2bnalHs8wyHUdqaxkahhO4xgukLozPLrQhkw/exec"; 
         
         let birthdayData = [];
 
-        // 📝 လူသားဆန်ဆန် ဆုတောင်းစာ ဘဏ်တိုက်ကြီး
         const teacherWishes = [
             "ယနေ့မှာ ကျရောက်တဲ့ မွေးနေ့ရက်မြတ်ကစလို့ အန္တရာယ်ခပ်သိမ်း ကင်းငြိမ်းပြီး ပညာရေးလောကအတွက် အောင်မြင်တဲ့ ခြေလှမ်းတွေကို အားမာန်အပြည့်နဲ့ ဆက်လှမ်းနိုင်ပါစေခင်ဗျာ။ Happy Birthday ပါ!",
             "သက်ရှည်ကျန်းမာပြီး စိတ်၏ချမ်းသာခြင်း၊ ကိုယ်၏ကျန်းမာခြင်းနဲ့ ပြည့်စုံပါစေကြောင်းနဲ့ တပည့်တွေအတွက် အားကိုးရတဲ့ မီးရှူးတန်ဆောင်ကြီးအဖြစ် ရာသက်ပန် ဝင်းပနိုင်ပါစေကြောင်း ဆုမွန်ကောင်းတောင်းအပ်ပါတယ်ခင်ဗျာ।"
@@ -94,7 +98,6 @@
             "ပျော်ရွှင်စရာ မွေးနေ့လေးဖြစ်ပါစေ။ အတန်းစာမေးပွဲတွေကို အမှတ်ကောင်းကောင်းနဲ့ အောင်မြင်ကျော်ဖြတ်နိုင်ပါစေ၊ စိတ်ကူးထားတဲ့ ရည်မှန်းချက်မှန်သမျှလည်း အကုန်အထည်ဖော်နိုင်ပါစေနော်။"
         ];
 
-        // Page Load ဖြစ်တာနဲ့ ဒေတာလှမ်းယူမည်
         document.addEventListener("DOMContentLoaded", () => {
             fetch(SHEET_API_URL)
                 .then(response => response.json())
@@ -109,7 +112,6 @@
                 });
         });
 
-        // ၁။ ဒီနေ့ မွေးနေ့ရှင် စစ်ဆေးပြီး Graffiti ကြဲမည့်စနစ်
         function checkTodayBirthdays() {
             const today = new Date();
             const monthNamesEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -148,7 +150,6 @@
             }());
         }
 
-        // ၂။ အနီးဆုံးမွေးနေ့ရှင်များ စစ်ထုတ်မည့်စနစ်
         function showNearBirthdays() {
             hideStudentYears();
             const today = new Date();
@@ -184,14 +185,12 @@
             renderCards(currentFiltered, titleText);
         }
 
-        // ၃။ ဆရာ/ဆရာမများ မွေးနေ့စာရင်းပြသခြင်း
         function showTeachers() {
             hideStudentYears();
             const teachers = birthdayData.filter(p => p.Role.toLowerCase() === 'teacher');
             renderCards(teachers, "🏢 ဆရာ/ဆရာမများ မွေးနေ့စာရင်း");
         }
 
-        // ၄။ ကျောင်းသား Year ခလုတ်များ အပိတ်အဖွင့်လုပ်ခြင်း
         function toggleStudentYears() {
             closeDisplay();
             const section = document.getElementById("studentYearSection");
@@ -202,13 +201,11 @@
             document.getElementById("studentYearSection").classList.add("hidden");
         }
 
-        // ၅။ ကျောင်းသားများကို Year အလိုက် Filter စစ်ထုတ်ခြင်း
         function showStudentsByYear(year) {
             const students = birthdayData.filter(p => p.Role.toLowerCase() === 'student' && p.Year === year);
             renderCards(students, `🎓 ကျောင်းသား/သူများ စာရင်း (${year})`);
         }
 
-        // HTML Cards များ တည်ဆောက်ပြီး Screen ပေါ်တင်ပေးသည့် စနစ်
         function renderCards(list, title) {
             document.getElementById("sectionTitle").innerText = title;
             const grid = document.getElementById("cardsGrid");
