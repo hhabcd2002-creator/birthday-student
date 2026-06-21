@@ -15,7 +15,7 @@
 
     <main class="container mx-auto px-4 py-8 max-w-4xl">
         
-        <div id="todayBanner" class="hidden bg-white/90 backdrop-blur-md border-2 border-amber-300 shadow-xl rounded-2xl p-6 text-center mb-8 relative overflow-hidden animate-bounce-short">
+        <div id="todayBanner" class="hidden bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 shadow-xl rounded-2xl p-6 text-center mb-8 relative overflow-hidden animate-bounce-short">
             <div class="absolute -top-10 -left-10 w-24 h-24 bg-amber-200 rounded-full opacity-50 blur-lg"></div>
             <div class="absolute -bottom-10 -right-10 w-24 h-24 bg-pink-200 rounded-full opacity-50 blur-lg"></div>
             <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-sky-500 mb-3">
@@ -31,55 +31,55 @@
         </header>
 
         <div id="mainMenu" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <button onclick="showNearBirthdays()" class="cursor-pointer bg-white/80 hover:bg-white p-6 rounded-2xl border border-sky-100/50 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
+            <button onclick="showNearBirthdays()" class="cursor-pointer bg-gradient-to-br from-sky-50 to-blue-100/70 hover:from-sky-100 hover:to-blue-200 p-6 rounded-2xl border border-sky-200 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
                 <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">⏰</div>
                 <h3 class="text-lg font-bold text-sky-950">Upcoming Birthdays</h3>
-                <p class="text-xs text-slate-400 mt-1">Birthdays in the nearest month</p>
+                <p class="text-xs text-sky-800/70 mt-1">Birthdays in the nearest month</p>
             </button>
 
-            <button onclick="showTeachers()" class="cursor-pointer bg-white/80 hover:bg-white p-6 rounded-2xl border border-sky-100/50 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
+            <button onclick="showTeachers()" class="cursor-pointer bg-gradient-to-br from-sky-50 to-blue-100/70 hover:from-sky-100 hover:to-blue-200 p-6 rounded-2xl border border-sky-200 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
                 <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🏢</div>
                 <h3 class="text-lg font-bold text-slate-700">Teachers</h3>
-                <p class="text-xs text-slate-400 mt-1">List of our respected teachers</p>
+                <p class="text-xs text-sky-800/70 mt-1">List of our respected teachers</p>
             </button>
 
-            <button onclick="toggleStudentYears()" class="cursor-pointer bg-white/80 hover:bg-white p-6 rounded-2xl border border-sky-100/50 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
+            <button onclick="toggleStudentYears()" class="cursor-pointer bg-gradient-to-br from-sky-50 to-blue-100/70 hover:from-sky-100 hover:to-blue-200 p-6 rounded-2xl border border-sky-200 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
                 <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🎓</div>
                 <h3 class="text-lg font-bold text-emerald-800">Students</h3>
-                <p class="text-xs text-slate-400 mt-1">View birthdays by class level</p>
+                <p class="text-xs text-sky-800/70 mt-1">View birthdays by class level</p>
             </button>
         </div>
 
-        <div id="studentYearSection" class="hidden bg-white/70 backdrop-blur-sm p-5 rounded-2xl border border-sky-100/50 text-center mb-8">
-            <p class="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">Select a Class Grade</p>
+        <div id="studentYearSection" class="hidden bg-gradient-to-br from-sky-50/80 to-blue-100/80 backdrop-blur-sm p-5 rounded-2xl border border-sky-200 text-center mb-8">
+            <p class="text-xs font-semibold text-sky-900 mb-4 uppercase tracking-wider">Select a Class Grade</p>
             <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-2">
-                <button onclick="showStudentsByYear('Year-1')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 1</button>
-                <button onclick="showStudentsByYear('Year-2')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 2</button>
-                <button onclick="showStudentsByYear('Year-3')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 3</button>
-                <button onclick="showStudentsByYear('Year-4')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 4</button>
-                <button onclick="showStudentsByYear('Year-5')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 5</button>
-                <button onclick="showStudentsByYear('Year-6')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 6</button>
-                <button onclick="showStudentsByYear('Year-7')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 7</button>
-                <button onclick="showStudentsByYear('Year-8')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 8</button>
-                <button onclick="showStudentsByYear('Year-9')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 9</button>
+                <button onclick="showStudentsByYear('Year-1')" class="cursor-pointer px-3 py-2 bg-gradient-to-b from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all transform active:scale-95">Year 1</button>
+                <button onclick="showStudentsByYear('Year-2')" class="cursor-pointer px-3 py-2 bg-gradient-to-b from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all transform active:scale-95">Year 2</button>
+                <button onclick="showStudentsByYear('Year-3')" class="cursor-pointer px-3 py-2 bg-gradient-to-b from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all transform active:scale-95">Year 3</button>
+                <button onclick="showStudentsByYear('Year-4')" class="cursor-pointer px-3 py-2 bg-gradient-to-b from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all transform active:scale-95">Year 4</button>
+                <button onclick="showStudentsByYear('Year-5')" class="cursor-pointer px-3 py-2 bg-gradient-to-b from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all transform active:scale-95">Year 5</button>
+                <button onclick="showStudentsByYear('Year-6')" class="cursor-pointer px-3 py-2 bg-gradient-to-b from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all transform active:scale-95">Year 6</button>
+                <button onclick="showStudentsByYear('Year-7')" class="cursor-pointer px-3 py-2 bg-gradient-to-b from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all transform active:scale-95">Year 7</button>
+                <button onclick="showStudentsByYear('Year-8')" class="cursor-pointer px-3 py-2 bg-gradient-to-b from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all transform active:scale-95">Year 8</button>
+                <button onclick="showStudentsByYear('Year-9')" class="cursor-pointer px-3 py-2 bg-gradient-to-b from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-all transform active:scale-95">Year 9</button>
             </div>
         </div>
 
         <div id="displaySection" class="hidden">
             <div class="flex justify-between items-center mb-6">
                 <h3 id="sectionTitle" class="text-xl font-bold text-sky-900">List</h3>
-                <button onclick="closeDisplay()" class="cursor-pointer text-xs font-medium text-slate-400 hover:text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">◀ Close</button>
+                <button onclick="closeDisplay()" class="cursor-pointer text-xs font-medium text-sky-900 hover:text-sky-700 bg-gradient-to-b from-sky-50 to-blue-100 px-3 py-1.5 rounded-lg border border-sky-200 shadow-sm transition-colors">◀ Close</button>
             </div>
             <div id="cardsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
         </div>
 
-        <div id="loading" class="text-center py-10 text-slate-400 font-medium text-sm">
+        <div id="loading" class="text-center py-10 text-sky-900/60 font-medium text-sm">
             <span class="inline-block animate-spin mr-2">🔄</span> Fetching data, please wait...
         </div>
 
     </main>
 
-    <footer class="text-center py-6 border-t border-sky-100/30 bg-white/30 text-xs font-bold tracking-wide text-sky-900/60 uppercase">
+    <footer class="text-center py-6 border-t border-sky-200/40 bg-white/20 text-xs font-bold tracking-wide text-sky-900/60 uppercase">
         Created by Sir Htet
     </footer>
 
@@ -88,7 +88,6 @@
         
         let birthdayData = [];
 
-        // Wishes text in English
         const teacherWishes = [
             "May this special day bring you endless joy, health, and prosperity. Thank you for being an inspiring guide and a wonderful teacher. Happy Birthday!",
             "Wishing you a very happy birthday! May you continue to shine bright and lead the next generation with your boundless wisdom and knowledge."
@@ -181,7 +180,7 @@
             const isCurrentMonth = today.getMonth() === checkMonthIndex;
             const titleText = isCurrentMonth 
                 ? `⏰ Birthdays in Current Month (${targetMonthName})` 
-                : `🔍 No birthdays this month. Nearest birthdays found in (${targetMonthName})`;
+                : `🔍 Nearest Birthdays found in (${targetMonthName})`;
             
             renderCards(currentFiltered, titleText);
         }
@@ -207,32 +206,34 @@
             renderCards(students, `🎓 Students List (${year})`);
         }
 
+        // Card Grid Items Background: Soft Blue Gradients ပြင်ဆင်ထားပါသည်
         function renderCards(list, title) {
             document.getElementById("sectionTitle").innerText = title;
             const grid = document.getElementById("cardsGrid");
             grid.innerHTML = "";
 
             if(list.length === 0) {
-                grid.innerHTML = `<p class="col-span-2 text-center text-slate-400 py-6 text-sm">No records found.</p>`;
+                grid.innerHTML = `<p class="col-span-2 text-center text-sky-900/50 py-6 text-sm">No records found.</p>`;
             } else {
                 list.forEach(p => {
                     const isTeacher = p.Role.toLowerCase() === 'teacher';
+                    // စာရင်းပြကတ်များကို အပြာနုရောင် အရောင်ပြေးအဖြစ် ပြောင်းလဲခြင်း
                     const themeClass = isTeacher 
-                        ? "border-l-4 border-slate-700 bg-slate-50/80" 
-                        : "border-l-4 border-emerald-400 bg-emerald-50/50";
+                        ? "border-l-4 border-slate-700 from-sky-50 to-indigo-100/60" 
+                        : "border-l-4 border-emerald-400 from-sky-50 to-blue-100/60";
                     
                     const roleBadge = isTeacher 
                         ? `<span class="bg-slate-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">Teacher</span>`
                         : `<span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">${p.Year}</span>`;
 
                     grid.innerHTML += `
-                        <div class="bg-white/90 p-4 rounded-xl shadow-xs border border-slate-100/50 flex justify-between items-center ${themeClass}">
+                        <div class="bg-gradient-to-br p-4 rounded-xl shadow-xs border border-sky-100 flex justify-between items-center ${themeClass}">
                             <div>
                                 <div class="flex items-center gap-2 mb-1">
-                                    <h4 class="font-bold text-slate-800 text-base">${p.Name}</h4>
+                                    <h4 class="font-bold text-sky-950 text-base">${p.Name}</h4>
                                     ${roleBadge}
                                 </div>
-                                <p class="text-xs text-slate-400 font-medium">📅 Date - ${p.Birthday}</p>
+                                <p class="text-xs text-sky-800/70 font-medium">📅 Date - ${p.Birthday}</p>
                             </div>
                             <div class="text-right">
                                 <span class="text-xl">🎂</span>
