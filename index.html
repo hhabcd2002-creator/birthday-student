@@ -11,15 +11,15 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="bg-sky-50 text-slate-800 min-h-screen flex flex-col justify-between">
+<body class="bg-gradient-to-tr from-sky-100 via-indigo-50 to-blue-100 text-slate-800 min-h-screen flex flex-col justify-between">
 
     <main class="container mx-auto px-4 py-8 max-w-4xl">
         
-        <div id="todayBanner" class="hidden bg-white border-2 border-amber-300 shadow-xl rounded-2xl p-6 text-center mb-8 relative overflow-hidden animate-bounce-short">
+        <div id="todayBanner" class="hidden bg-white/90 backdrop-blur-md border-2 border-amber-300 shadow-xl rounded-2xl p-6 text-center mb-8 relative overflow-hidden animate-bounce-short">
             <div class="absolute -top-10 -left-10 w-24 h-24 bg-amber-200 rounded-full opacity-50 blur-lg"></div>
             <div class="absolute -bottom-10 -right-10 w-24 h-24 bg-pink-200 rounded-full opacity-50 blur-lg"></div>
             <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-sky-500 mb-3">
-                🎉 ယနေ့ မွေးနေ့မင်္ဂလာရှင် 🎉
+                🎉 Today's Birthday Stars 🎉
             </h1>
             <div id="todayNames" class="text-2xl font-bold text-sky-900 mb-4"></div>
             <p id="todayWish" class="text-slate-600 italic font-medium max-w-2xl mx-auto leading-relaxed"></p>
@@ -27,31 +27,31 @@
 
         <header class="text-center mb-10">
             <h2 class="text-3xl font-bold text-sky-900 tracking-tight mb-2">🎈 Birthday Memory Hub 🎈</h2>
-            <p class="text-slate-500 text-sm">ဆရာ၊ ဆရာမများနှင့် ကျောင်းသား၊ ကျောင်းသူများ၏ မွေးနေ့အမှတ်တရများ</p>
+            <p class="text-slate-500 text-sm">Special memories of our beloved teachers and students</p>
         </header>
 
         <div id="mainMenu" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <button onclick="showNearBirthdays()" class="cursor-pointer bg-white hover:bg-sky-100/50 p-6 rounded-2xl border border-sky-100 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
+            <button onclick="showNearBirthdays()" class="cursor-pointer bg-white/80 hover:bg-white p-6 rounded-2xl border border-sky-100/50 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
                 <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">⏰</div>
-                <h3 class="text-lg font-bold text-sky-950">အနီးဆုံးမွေးနေ့ရှင်များ</h3>
-                <p class="text-xs text-slate-400 mt-1">လက်ရှိလအတွင်း မွေးနေ့ရှိသူများ</p>
+                <h3 class="text-lg font-bold text-sky-950">Upcoming Birthdays</h3>
+                <p class="text-xs text-slate-400 mt-1">Birthdays in the nearest month</p>
             </button>
 
-            <button onclick="showTeachers()" class="cursor-pointer bg-white hover:bg-sky-100/50 p-6 rounded-2xl border border-sky-100 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
+            <button onclick="showTeachers()" class="cursor-pointer bg-white/80 hover:bg-white p-6 rounded-2xl border border-sky-100/50 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
                 <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🏢</div>
-                <h3 class="text-lg font-bold text-slate-700">ဆရာ/ဆရာမများ မွေးနေ့</h3>
-                <p class="text-xs text-slate-400 mt-1">လေးစားရပါသော ဆရာမကြီးများစာရင်း</p>
+                <h3 class="text-lg font-bold text-slate-700">Teachers</h3>
+                <p class="text-xs text-slate-400 mt-1">List of our respected teachers</p>
             </button>
 
-            <button onclick="toggleStudentYears()" class="cursor-pointer bg-white hover:bg-sky-100/50 p-6 rounded-2xl border border-sky-100 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
+            <button onclick="toggleStudentYears()" class="cursor-pointer bg-white/80 hover:bg-white p-6 rounded-2xl border border-sky-100/50 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
                 <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🎓</div>
-                <h3 class="text-lg font-bold text-emerald-800">ကျောင်းသား/သူများ မွေးနေ့</h3>
-                <p class="text-xs text-slate-400 mt-1">အတန်းအလိုက် ခွဲခြားကြည့်ရှုရန်</p>
+                <h3 class="text-lg font-bold text-emerald-800">Students</h3>
+                <p class="text-xs text-slate-400 mt-1">View birthdays by class level</p>
             </button>
         </div>
 
-        <div id="studentYearSection" class="hidden bg-white/60 backdrop-blur-sm p-5 rounded-2xl border border-sky-100 text-center mb-8">
-            <p class="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">ကျောင်းသားများအတွက် အတန်းရွေးချယ်ပါ</p>
+        <div id="studentYearSection" class="hidden bg-white/70 backdrop-blur-sm p-5 rounded-2xl border border-sky-100/50 text-center mb-8">
+            <p class="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">Select a Class Grade</p>
             <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-2">
                 <button onclick="showStudentsByYear('Year-1')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 1</button>
                 <button onclick="showStudentsByYear('Year-2')" class="cursor-pointer px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors">Year 2</button>
@@ -67,19 +67,19 @@
 
         <div id="displaySection" class="hidden">
             <div class="flex justify-between items-center mb-6">
-                <h3 id="sectionTitle" class="text-xl font-bold text-sky-900">စာရင်း</h3>
-                <button onclick="closeDisplay()" class="cursor-pointer text-xs font-medium text-slate-400 hover:text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">◀ ပိတ်မည်</button>
+                <h3 id="sectionTitle" class="text-xl font-bold text-sky-900">List</h3>
+                <button onclick="closeDisplay()" class="cursor-pointer text-xs font-medium text-slate-400 hover:text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">◀ Close</button>
             </div>
             <div id="cardsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
         </div>
 
         <div id="loading" class="text-center py-10 text-slate-400 font-medium text-sm">
-            <span class="inline-block animate-spin mr-2">🔄</span> ဒေတာများ ဆွဲယူနေပါသည်...
+            <span class="inline-block animate-spin mr-2">🔄</span> Fetching data, please wait...
         </div>
 
     </main>
 
-    <footer class="text-center py-6 border-t border-sky-100 bg-white/40 text-xs font-bold tracking-wide text-sky-900/60 uppercase">
+    <footer class="text-center py-6 border-t border-sky-100/30 bg-white/30 text-xs font-bold tracking-wide text-sky-900/60 uppercase">
         Created by Sir Htet
     </footer>
 
@@ -88,14 +88,15 @@
         
         let birthdayData = [];
 
+        // Wishes text in English
         const teacherWishes = [
-            "ယနေ့မှာ ကျရောက်တဲ့ မွေးနေ့ရက်မြတ်ကစလို့ အန္တရာယ်ခပ်သိမ်း ကင်းငြိမ်းပြီး ပညာရေးလောကအတွက် အောင်မြင်တဲ့ ခြေလှမ်းတွေကို အားမာန်အပြည့်နဲ့ ဆက်လှမ်းနိုင်ပါစေခင်ဗျာ။ Happy Birthday ပါ!",
-            "သက်ရှည်ကျန်းမာပြီး စိတ်၏ချမ်းသာခြင်း၊ ကိုယ်၏ကျန်းမာခြင်းနဲ့ ပြည့်စုံပါစေကြောင်းနဲ့ တပည့်တွေအတွက် အားကိုးရတဲ့ မီးရှူးတန်ဆောင်ကြီးအဖြစ် ရာသက်ပန် ဝင်းပနိုင်ပါစေကြောင်း ဆုမွန်ကောင်းတောင်းအပ်ပါတယ်ခင်ဗျာ।"
+            "May this special day bring you endless joy, health, and prosperity. Thank you for being an inspiring guide and a wonderful teacher. Happy Birthday!",
+            "Wishing you a very happy birthday! May you continue to shine bright and lead the next generation with your boundless wisdom and knowledge."
         ];
 
         const studentWishes = [
-            "ဒီနေ့မွေးနေ့ကစပြီး လိုအင်ဆန္ဒတွေ တစ်လုံးတစ်ဝတည်း ပြည့်ဝပါစေ။ မိဘနဲ့ ဆရာသမားတွေ အားကိုးရတဲ့ ထူးချွန်ထက်မြက်ပြီး အောင်မြင်တဲ့ လူငယ်လေး ဖြစ်ပါစေနော်။ Happy Birthday!",
-            "ပျော်ရွှင်စရာ မွေးနေ့လေးဖြစ်ပါစေ။ အတန်းစာမေးပွဲတွေကို အမှတ်ကောင်းကောင်းနဲ့ အောင်မြင်ကျော်ဖြတ်နိုင်ပါစေ၊ စိတ်ကူးထားတဲ့ ရည်မှန်းချက်မှန်သမျှလည်း အကုန်အထည်ဖော်နိုင်ပါစေနော်။"
+            "Happy Birthday! May all your dreams and wishes come true. Wishing you great success in your studies and a wonderful year ahead!",
+            "Have a fantastic birthday! Stay bright, stay curious, and may you score excellent marks in all your upcoming exams. Enjoy your day!"
         ];
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -107,7 +108,7 @@
                     checkTodayBirthdays();
                 })
                 .catch(err => {
-                    document.getElementById("loading").innerText = "ဒေတာဆွဲရတာ အမှားအယွင်းရှိနေပါတယ်။ URL သေချာစစ်ပေးပါ။";
+                    document.getElementById("loading").innerText = "Failed to load data. Please check your API URL.";
                     console.error(err);
                 });
         });
@@ -126,7 +127,7 @@
             });
             
             if(todaysWinners.length > 0) {
-                const names = todaysWinners.map(p => `${p.Name} (${p.Role.toLowerCase() === 'teacher' ? 'ဆရာ/မ' : p.Year})`).join(", ");
+                const names = todaysWinners.map(p => `${p.Name} (${p.Role.toLowerCase() === 'teacher' ? 'Teacher' : p.Year})`).join(", ");
                 document.getElementById("todayNames").innerText = names;
                 
                 const isTeacher = todaysWinners.some(p => p.Role.toLowerCase() === 'teacher');
@@ -158,7 +159,7 @@
             let currentFiltered = [];
             let targetMonthName = "";
 
-            const monthNamesMy = ["ဇန်နဝါရီ", "ဖေဖော်ဝါရီ", "မတ်", "ဧပြီ", "မေ", "ဇွန်", "ဇူလိုင်", "သြγုတ်", "စက်တင်ဘာ", "အောက်တိုဘာ", "နိုဝင်ဘာ", "ဒီဇင်ဘာ"];
+            const monthNamesEnFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             const monthNamesEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
             while (loopCount < 12) {
@@ -170,7 +171,7 @@
                 });
                 
                 if(currentFiltered.length > 0) {
-                    targetMonthName = monthNamesMy[checkMonthIndex];
+                    targetMonthName = monthNamesEnFull[checkMonthIndex];
                     break;
                 }
                 checkMonthIndex = checkMonthIndex === 11 ? 0 : checkMonthIndex + 1;
@@ -179,8 +180,8 @@
 
             const isCurrentMonth = today.getMonth() === checkMonthIndex;
             const titleText = isCurrentMonth 
-                ? `⏰ လက်ရှိ (${targetMonthName}) လအတွင်း မွေးနေ့ရှင်များ` 
-                : `🔍 လက်ရှိလတွင် မရှိပါ။ နောက်ထပ်အနီးစပ်ဆုံး (${targetMonthName}) လမှ မွေးနေ့ရှင်များ`;
+                ? `⏰ Birthdays in Current Month (${targetMonthName})` 
+                : `🔍 No birthdays this month. Nearest birthdays found in (${targetMonthName})`;
             
             renderCards(currentFiltered, titleText);
         }
@@ -188,7 +189,7 @@
         function showTeachers() {
             hideStudentYears();
             const teachers = birthdayData.filter(p => p.Role.toLowerCase() === 'teacher');
-            renderCards(teachers, "🏢 ဆရာ/ဆရာမများ မွေးနေ့စာရင်း");
+            renderCards(teachers, "🏢 Respected Teachers' Birthdays");
         }
 
         function toggleStudentYears() {
@@ -203,7 +204,7 @@
 
         function showStudentsByYear(year) {
             const students = birthdayData.filter(p => p.Role.toLowerCase() === 'student' && p.Year === year);
-            renderCards(students, `🎓 ကျောင်းသား/သူများ စာရင်း (${year})`);
+            renderCards(students, `🎓 Students List (${year})`);
         }
 
         function renderCards(list, title) {
@@ -212,26 +213,26 @@
             grid.innerHTML = "";
 
             if(list.length === 0) {
-                grid.innerHTML = `<p class="col-span-2 text-center text-slate-400 py-6 text-sm">ပြသစရာ စာရင်းမရှိပါခင်ဗျာ။</p>`;
+                grid.innerHTML = `<p class="col-span-2 text-center text-slate-400 py-6 text-sm">No records found.</p>`;
             } else {
                 list.forEach(p => {
                     const isTeacher = p.Role.toLowerCase() === 'teacher';
                     const themeClass = isTeacher 
-                        ? "border-l-4 border-slate-700 bg-slate-50" 
-                        : "border-l-4 border-emerald-400 bg-emerald-50/40";
+                        ? "border-l-4 border-slate-700 bg-slate-50/80" 
+                        : "border-l-4 border-emerald-400 bg-emerald-50/50";
                     
                     const roleBadge = isTeacher 
-                        ? `<span class="bg-slate-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">ဆရာ/မ</span>`
+                        ? `<span class="bg-slate-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">Teacher</span>`
                         : `<span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">${p.Year}</span>`;
 
                     grid.innerHTML += `
-                        <div class="bg-white p-4 rounded-xl shadow-xs border border-slate-100 flex justify-between items-center ${themeClass}">
+                        <div class="bg-white/90 p-4 rounded-xl shadow-xs border border-slate-100/50 flex justify-between items-center ${themeClass}">
                             <div>
                                 <div class="flex items-center gap-2 mb-1">
                                     <h4 class="font-bold text-slate-800 text-base">${p.Name}</h4>
                                     ${roleBadge}
                                 </div>
-                                <p class="text-xs text-slate-400 font-medium">📅 မွေးရက် - ${p.Birthday}</p>
+                                <p class="text-xs text-slate-400 font-medium">📅 Date - ${p.Birthday}</p>
                             </div>
                             <div class="text-right">
                                 <span class="text-xl">🎂</span>
