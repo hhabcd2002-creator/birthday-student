@@ -78,15 +78,15 @@
     </footer>
 
     <script>
-        // ကိုကို့ရဲ့ API Web App URL ကို ဒီမှာ အသင့်ချိတ်ဆက်ပေးထားပါတယ်
-        const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzGvSTZYLaeWTjul-6IAMvvE0tEsCxn3Z-1m0wgGM7i6ra6DcUYFc5YeZ4R_N8x2w8XhQ/exec"; 
+        // လင့်ခ်အသစ်စက်စက်ကို အောက်တွင် တိုက်ရိုက်ထည့်သွင်းပေးထားပါသည်
+        const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxHkclv0R8xra6_-B9ZohDKOogazdDxRq2bnalHs8wyHUdqaxkahhO4xgukLozPLrQhkw/exec"; 
         
         let birthdayData = [];
 
         // 📝 လူသားဆန်ဆန် ဆုတောင်းစာ ဘဏ်တိုက်ကြီး
         const teacherWishes = [
             "ယနေ့မှာ ကျရောက်တဲ့ မွေးနေ့ရက်မြတ်ကစလို့ အန္တရာယ်ခပ်သိမ်း ကင်းငြိမ်းပြီး ပညာရေးလောကအတွက် အောင်မြင်တဲ့ ခြေလှမ်းတွေကို အားမာန်အပြည့်နဲ့ ဆက်လှမ်းနိုင်ပါစေခင်ဗျာ။ Happy Birthday ပါ!",
-            "သက်ရှည်ကျန်းမာပြီး စိတ်၏ချမ်းသာခြင်း၊ ကိုယ်၏ကျန်းမာခြင်းနဲ့ ပြည့်စုံပါစေကြောင်းနဲ့ တပည့်တွေအတွက် အားကိုးရတဲ့ မီးရှူးတန်ဆောင်ကြီးအဖြစ် ရာသက်ပန် ဝင်းပနိုင်ပါစေကြောင်း ဆုမွန်ကောင်းတောင်းအပ်ပါတယ်ခင်ဗျာ။"
+            "သက်ရှည်ကျန်းမာပြီး စိတ်၏ချမ်းသာခြင်း၊ ကိုယ်၏ကျန်းမာခြင်းနဲ့ ပြည့်စုံပါစေကြောင်းနဲ့ တပည့်တွေအတွက် အားကိုးရတဲ့ မီးရှူးတန်ဆောင်ကြီးအဖြစ် ရာသက်ပန် ဝင်းပနိုင်ပါစေကြောင်း ဆုမွန်ကောင်းတောင်းအပ်ပါတယ်ခင်ဗျာ।"
         ];
 
         const studentWishes = [
@@ -94,7 +94,7 @@
             "ပျော်ရွှင်စရာ မွေးနေ့လေးဖြစ်ပါစေ။ အတန်းစာမေးပွဲတွေကို အမှတ်ကောင်းကောင်းနဲ့ အောင်မြင်ကျော်ဖြတ်နိုင်ပါစေ၊ စိတ်ကူးထားတဲ့ ရည်မှန်းချက်မှန်သမျှလည်း အကုန်အထည်ဖော်နိုင်ပါစေနော်။"
         ];
 
-        // Page Load ဖြစ်တာနဲ့ ဒေတာလှမ်းယူမယ်
+        // Page Load ဖြစ်တာနဲ့ ဒေတာလှမ်းယူမည်
         document.addEventListener("DOMContentLoaded", () => {
             fetch(SHEET_API_URL)
                 .then(response => response.json())
@@ -104,7 +104,7 @@
                     checkTodayBirthdays();
                 })
                 .catch(err => {
-                    document.getElementById("loading").innerText = "ဒေတာဆွဲရတာ အမှားအယွင်းရှိနေပါတယ်။ URL သေချာစစ်ပေးပါ ကိုကို။";
+                    document.getElementById("loading").innerText = "ဒေတာဆွဲရတာ အမှားအယွင်းရှိနေပါတယ်။ URL သေချာစစ်ပေးပါ။";
                     console.error(err);
                 });
         });
@@ -124,10 +124,10 @@
             });
             
             if(todaysWinners.length > 0) {
-                const names = todaysWinners.map(p => `${p.Name} (${p.Role === 'Teacher' ? 'ဆရာ/မ' : p.Year})`).join(", ");
+                const names = todaysWinners.map(p => `${p.Name} (${p.Role.toLowerCase() === 'teacher' ? 'ဆရာ/မ' : p.Year})`).join(", ");
                 document.getElementById("todayNames").innerText = names;
                 
-                const isTeacher = todaysWinners.some(p => p.Role === 'Teacher');
+                const isTeacher = todaysWinners.some(p => p.Role.toLowerCase() === 'teacher');
                 const wishBank = isTeacher ? teacherWishes : studentWishes;
                 const randomWish = wishBank[Math.floor(Math.random() * wishBank.length)];
                 document.getElementById("todayWish").innerText = randomWish;
@@ -157,7 +157,7 @@
             let currentFiltered = [];
             let targetMonthName = "";
 
-            const monthNamesMy = ["ဇန်နဝါရီ", "ဖေဖော်ဝါရီ", "မတ်", "ဧပြီ", "မေ", "ဇွန်", "ဇူလိုင်", "သြဂုတ်", "စက်တင်ဘာ", "အောက်တိုဘာ", "နိုဝင်ဘာ", "ဒီဇင်ဘာ"];
+            const monthNamesMy = ["ဇန်နဝါရီ", "ဖေဖော်ဝါရီ", "မတ်", "ဧပြီ", "မေ", "ဇွန်", "ဇူလိုင်", "သြγုတ်", "စက်တင်ဘာ", "အောက်တိုဘာ", "နိုဝင်ဘာ", "ဒီဇင်ဘာ"];
             const monthNamesEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
             while (loopCount < 12) {
@@ -219,7 +219,6 @@
             } else {
                 list.forEach(p => {
                     const isTeacher = p.Role.toLowerCase() === 'teacher';
-                    // အရောင် Palette အတိုင်း ခွဲခြားခြင်း (Teacher = Slate/Navy, Student = Mint Green)
                     const themeClass = isTeacher 
                         ? "border-l-4 border-slate-700 bg-slate-50" 
                         : "border-l-4 border-emerald-400 bg-emerald-50/40";
