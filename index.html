@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Memory Hub</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-sky-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        
+        <div id="todayBanner" class="hidden bg-white border-2 border-amber-300 shadow-xl rounded-2xl p-6 text-center mb-8 relative overflow-hidden animate-bounce-short">
+            <div class="absolute -top-10 -left-10 w-24 h-24 bg-amber-200 rounded-full opacity-50 blur-lg"></div>
+            <div class="absolute -bottom-10 -right-10 w-24 h-24 bg-pink-200 rounded-full opacity-50 blur-lg"></div>
+            <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-sky-500 mb-3">
+                🎉 ယနေ့ မွေးနေ့မင်္ဂလာရှင် 🎉
+            </h1>
+            <div id="todayNames" class="text-2xl font-bold text-sky-900 mb-4"></div>
+            <p id="todayWish" class="text-slate-600 italic font-medium max-w-2xl mx-auto leading-relaxed"></p>
+        </div>
+
+        <header class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-sky-900 tracking-tight mb-2">🎈 Birthday Memory Hub 🎈</h2>
+            <p class="text-slate-500 text-sm">ဆရာ၊ ဆရာမများနှင့် ကျောင်းသား၊ ကျောင်းသူများ၏ မွေးနေ့အမှတ်တရများ</p>
+        </header>
+
+        <div id="mainMenu" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <button onclick="showNearBirthdays()" class="cursor-pointer bg-white hover:bg-sky-100/50 p-6 rounded-2xl border border-sky-100 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
+                <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">⏰</div>
+                <h3 class="text-lg font-bold text-sky-950">အနီးဆုံးမွေးနေ့ရှင်များ</h3>
+                <p class="text-xs text-slate-400 mt-1">လက်ရှိလအတွင်း မွေးနေ့ရှိသူများ</p>
+            </button>
+
+            <button onclick="showTeachers()" class="cursor-pointer bg-white hover:bg-sky-100/50 p-6 rounded-2xl border border-sky-100 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
+                <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🏢</div>
+                <h3 class="text-lg font-bold text-slate-700">ဆရာ/ဆရာမများ မွေးနေ့</h3>
+                <p class="text-xs text-slate-400 mt-1">လေးစားရပါသော ဆရာမကြီးများစာရင်း</p>
+            </button>
+
+            <button onclick="toggleStudentYears()" class="cursor-pointer bg-white hover:bg-sky-100/50 p-6 rounded-2xl border border-sky-100 shadow-sm transition-all duration-300 transform hover:-translate-y-1 text-center group">
+                <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🎓</div>
+                <h3 class="text-lg font-bold text-emerald-800">ကျောင်းသား/သူများ မွေးနေ့</h3>
+                <p class="text-xs text-slate-400 mt-1">အတန်းအလိုက် ခွဲခြားကြည့်ရှုရန်</p>
+            </button>
+        </div>
+
+        <div id="studentYearSection" class="hidden bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-sky-100 text-center mb-8">
+            <p class="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-wider">ကျောင်းသားများအတွက် အတန်းရွေးချယ်ပါ</p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <button onclick="showStudentsByYear('Year-1')" class="cursor-pointer px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium shadow-sm transition-colors">Year 1</button>
+                <button onclick="showStudentsByYear('Year-2')" class="cursor-pointer px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium shadow-sm transition-colors">Year 2</button>
+                <button onclick="showStudentsByYear('Year-3')" class="cursor-pointer px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium shadow-sm transition-colors">Year 3</button>
+            </div>
+        </div>
+
+        <div id="displaySection" class="hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="sectionTitle" class="text-xl font-bold text-sky-900">စာရင်း</h3>
+                <button onclick="closeDisplay()" class="cursor-pointer text-xs font-medium text-slate-400 hover:text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">◀ ပိတ်မည်</button>
+            </div>
+            <div id="cardsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+        </div>
+
+        <div id="loading" class="text-center py-10 text-slate-400 font-medium text-sm">
+            <span class="inline-block animate-spin mr-2">🔄</span> ဒေတာများ ဆွဲယူနေပါသည်...
+        </div>
+
+    </main>
+
+    <footer class="text-center py-6 border-t border-sky-100 bg-white/40 text-xs font-bold tracking-wide text-sky-900/60 uppercase">
+        Created by Sir Htet
+    </footer>
+
+    <script>
+        // ကိုကို့ရဲ့ API Web App URL ကို ဒီမှာ အသင့်ချိတ်ဆက်ပေးထားပါတယ်
+        const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzGvSTZYLaeWTjul-6IAMvvE0tEsCxn3Z-1m0wgGM7i6ra6DcUYFc5YeZ4R_N8x2w8XhQ/exec"; 
+        
+        let birthdayData = [];
+
+        // 📝 လူသားဆန်ဆန် ဆုတောင်းစာ ဘဏ်တိုက်ကြီး
+        const teacherWishes = [
+            "ယနေ့မှာ ကျရောက်တဲ့ မွေးနေ့ရက်မြတ်ကစလို့ အန္တရာယ်ခပ်သိမ်း ကင်းငြိမ်းပြီး ပညာရေးလောကအတွက် အောင်မြင်တဲ့ ခြေလှမ်းတွေကို အားမာန်အပြည့်နဲ့ ဆက်လှမ်းနိုင်ပါစေခင်ဗျာ။ Happy Birthday ပါ!",
+            "သက်ရှည်ကျန်းမာပြီး စိတ်၏ချမ်းသာခြင်း၊ ကိုယ်၏ကျန်းမာခြင်းနဲ့ ပြည့်စုံပါစေကြောင်းနဲ့ တပည့်တွေအတွက် အားကိုးရတဲ့ မီးရှူးတန်ဆောင်ကြီးအဖြစ် ရာသက်ပန် ဝင်းပနိုင်ပါစေကြောင်း ဆုမွန်ကောင်းတောင်းအပ်ပါတယ်ခင်ဗျာ။"
+        ];
+
+        const studentWishes = [
+            "ဒီနေ့မွေးနေ့ကစပြီး လိုအင်ဆန္ဒတွေ တစ်လုံးတစ်ဝတည်း ပြည့်ဝပါစေ။ မိဘနဲ့ ဆရာသမားတွေ အားကိုးရတဲ့ ထူးချွန်ထက်မြက်ပြီး အောင်မြင်တဲ့ လူငယ်လေး ဖြစ်ပါစေနော်။ Happy Birthday!",
+            "ပျော်ရွှင်စရာ မွေးနေ့လေးဖြစ်ပါစေ။ အတန်းစာမေးပွဲတွေကို အမှတ်ကောင်းကောင်းနဲ့ အောင်မြင်ကျော်ဖြတ်နိုင်ပါစေ၊ စိတ်ကူးထားတဲ့ ရည်မှန်းချက်မှန်သမျှလည်း အကုန်အထည်ဖော်နိုင်ပါစေနော်။"
+        ];
+
+        // Page Load ဖြစ်တာနဲ့ ဒေတာလှမ်းယူမယ်
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch(SHEET_API_URL)
+                .then(response => response.json())
+                .then(data => {
+                    birthdayData = data;
+                    document.getElementById("loading").classList.add("hidden");
+                    checkTodayBirthdays();
+                })
+                .catch(err => {
+                    document.getElementById("loading").innerText = "ဒေတာဆွဲရတာ အမှားအယွင်းရှိနေပါတယ်။ URL သေချာစစ်ပေးပါ ကိုကို။";
+                    console.error(err);
+                });
+        });
+
+        // ၁။ ဒီနေ့ မွေးနေ့ရှင် စစ်ဆေးပြီး Graffiti ကြဲမည့်စနစ်
+        function checkTodayBirthdays() {
+            const today = new Date();
+            const monthNamesEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            
+            const currentDayStr = ("0" + today.getDate()).slice(-2); 
+            const currentMonthStr = monthNamesEn[today.getMonth()]; 
+            
+            const todaysWinners = birthdayData.filter(p => {
+                if (!p.Birthday) return false;
+                const parts = p.Birthday.split(" "); 
+                return parts.length >= 2 && parts[0] === currentDayStr && parts[1] === currentMonthStr;
+            });
+            
+            if(todaysWinners.length > 0) {
+                const names = todaysWinners.map(p => `${p.Name} (${p.Role === 'Teacher' ? 'ဆရာ/မ' : p.Year})`).join(", ");
+                document.getElementById("todayNames").innerText = names;
+                
+                const isTeacher = todaysWinners.some(p => p.Role === 'Teacher');
+                const wishBank = isTeacher ? teacherWishes : studentWishes;
+                const randomWish = wishBank[Math.floor(Math.random() * wishBank.length)];
+                document.getElementById("todayWish").innerText = randomWish;
+                
+                document.getElementById("todayBanner").classList.remove("hidden");
+                triggerConfetti();
+            }
+        }
+
+        function triggerConfetti() {
+            var duration = 5 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
+
+        // ၂။ အနီးဆုံးမွေးနေ့ရှင်များ စစ်ထုတ်မည့်စနစ်
+        function showNearBirthdays() {
+            hideStudentYears();
+            const today = new Date();
+            let checkMonthIndex = today.getMonth(); 
+            let loopCount = 0;
+            let currentFiltered = [];
+            let targetMonthName = "";
+
+            const monthNamesMy = ["ဇန်နဝါရီ", "ဖေဖော်ဝါရီ", "မတ်", "ဧပြီ", "မေ", "ဇွန်", "ဇူလိုင်", "သြဂုတ်", "စက်တင်ဘာ", "အောက်တိုဘာ", "နိုဝင်ဘာ", "ဒီဇင်ဘာ"];
+            const monthNamesEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            while (loopCount < 12) {
+                let targetMonthEn = monthNamesEn[checkMonthIndex];
+                currentFiltered = birthdayData.filter(p => {
+                    if (!p.Birthday) return false;
+                    const parts = p.Birthday.split(" ");
+                    return parts.length >= 2 && parts[1] === targetMonthEn;
+                });
+                
+                if(currentFiltered.length > 0) {
+                    targetMonthName = monthNamesMy[checkMonthIndex];
+                    break;
+                }
+                checkMonthIndex = checkMonthIndex === 11 ? 0 : checkMonthIndex + 1;
+                loopCount++;
+            }
+
+            const isCurrentMonth = today.getMonth() === checkMonthIndex;
+            const titleText = isCurrentMonth 
+                ? `⏰ လက်ရှိ (${targetMonthName}) လအတွင်း မွေးနေ့ရှင်များ` 
+                : `🔍 လက်ရှိလတွင် မရှိပါ။ နောက်ထပ်အနီးစပ်ဆုံး (${targetMonthName}) လမှ မွေးနေ့ရှင်များ`;
+            
+            renderCards(currentFiltered, titleText);
+        }
+
+        // ၃။ ဆရာ/ဆရာမများ မွေးနေ့စာရင်းပြသခြင်း
+        function showTeachers() {
+            hideStudentYears();
+            const teachers = birthdayData.filter(p => p.Role.toLowerCase() === 'teacher');
+            renderCards(teachers, "🏢 ဆရာ/ဆရာမများ မွေးနေ့စာရင်း");
+        }
+
+        // ၄။ ကျောင်းသား Year ခလုတ်များ အပိတ်အဖွင့်လုပ်ခြင်း
+        function toggleStudentYears() {
+            closeDisplay();
+            const section = document.getElementById("studentYearSection");
+            section.classList.toggle("hidden");
+        }
+
+        function hideStudentYears() {
+            document.getElementById("studentYearSection").classList.add("hidden");
+        }
+
+        // ၅။ ကျောင်းသားများကို Year အလိုက် Filter စစ်ထုတ်ခြင်း
+        function showStudentsByYear(year) {
+            const students = birthdayData.filter(p => p.Role.toLowerCase() === 'student' && p.Year === year);
+            renderCards(students, `🎓 ကျောင်းသား/သူများ စာရင်း (${year})`);
+        }
+
+        // HTML Cards များ တည်ဆောက်ပြီး Screen ပေါ်တင်ပေးသည့် စနစ်
+        function renderCards(list, title) {
+            document.getElementById("sectionTitle").innerText = title;
+            const grid = document.getElementById("cardsGrid");
+            grid.innerHTML = "";
+
+            if(list.length === 0) {
+                grid.innerHTML = `<p class="col-span-2 text-center text-slate-400 py-6 text-sm">ပြသစရာ စာရင်းမရှိပါခင်ဗျာ။</p>`;
+            } else {
+                list.forEach(p => {
+                    const isTeacher = p.Role.toLowerCase() === 'teacher';
+                    // အရောင် Palette အတိုင်း ခွဲခြားခြင်း (Teacher = Slate/Navy, Student = Mint Green)
+                    const themeClass = isTeacher 
+                        ? "border-l-4 border-slate-700 bg-slate-50" 
+                        : "border-l-4 border-emerald-400 bg-emerald-50/40";
+                    
+                    const roleBadge = isTeacher 
+                        ? `<span class="bg-slate-700 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">ဆရာ/မ</span>`
+                        : `<span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-md">${p.Year}</span>`;
+
+                    grid.innerHTML += `
+                        <div class="bg-white p-4 rounded-xl shadow-xs border border-slate-100 flex justify-between items-center ${themeClass}">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h4 class="font-bold text-slate-800 text-base">${p.Name}</h4>
+                                    ${roleBadge}
+                                </div>
+                                <p class="text-xs text-slate-400 font-medium">📅 မွေးရက် - ${p.Birthday}</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xl">🎂</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById("displaySection").classList.remove("hidden");
+            document.getElementById("displaySection").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeDisplay() {
+            document.getElementById("displaySection").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
